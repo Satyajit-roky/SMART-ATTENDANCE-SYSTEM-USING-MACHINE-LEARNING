@@ -1,101 +1,92 @@
-<p>
-# Face Recognition & Attendance System 🧑‍💻🎯
+# SMART ATTENDANCE SYSTEM USING MACHINE LEARNING
 
-A Python-based project using OpenCV and KNN to recognize faces in real-time and automatically record attendance into a CSV file. It includes a custom UI layout with a red background area for the webcam display.
+A Python-based face recognition attendance system using OpenCV, KNN, and a simple GUI.
 
----
-
-## 🚀 Features
-
-- 📸 Real-time Face Detection using OpenCV
-- 🧠 Face Recognition using K-Nearest Neighbors (KNN)
-- 📝 Automatic Attendance Logging into CSV
-- 🎨 Custom UI Layout with Red Webcam Background
-- 🔊 Voice Feedback using Windows Text-to-Speech (TTS)
-- 🖱️ Press `'O'` to take attendance
-- 🧪 Press `'Q'` to quit
+This project captures face images, trains a KNN model, and logs attendance into a CSV file every time a recognized person presses **`O`**.
 
 ---
 
-## 🖥️ Requirements
+## ✅ Features
 
-Make sure to install these Python modules:
+- Real-time face detection with OpenCV
+- Face recognition using K-Nearest Neighbors (KNN)
+- Attendance logging to `Attendance/Attendance_<DATE>.csv`
+- Optional voice feedback (Windows TTS)
+- Streamlit dashboard to view attendance (via `app.py`)
+
+---
+
+## 🧰 Requirements
+
+- Python 3.8+
+- Webcam
+
+Install required Python packages:
 
 ```bash
-pip install opencv-python numpy pywin32
-If using KNN or face_recognition:
+pip install -r requirements.txt
+```
 
-bash
-Copy
-Edit
-pip install face-recognition scikit-learn
-🗂️ Folder Structure
-bash
-Copy
-Edit
-face_recognition_project/
-├── add_faces.py        
-├── train.py              
-├── test.py               
-├── data/                
-├── attendance.csv        
-├── trained_model.pkl     
-└── README.md             
-📷 Screenshot
-
-🛠️ How to Use
-Add Faces:
-
-Run add_faces.py
-
-Enter your name
-
-Capture images
-
-Train Model:
-
-Run app.py
-
-Trains and saves the model as faces_data.pkl
-
-Take Attendance:
-
-Run test.py
-
-Press O to take attendance
-
-Press Q to quit
-
-✅ Output
-✔️ When you press 'O', your name and timestamp will be saved in attendance.csv.
-✔️ The system will also say “Attendance Taken”.
-
-👨‍💻 Developed By
-Sujit Malla
-Student | Developer | Tech Enthusiast
-
-📬 Contact
-For any suggestions or bugs:
-📧 Email:sujitmalla000@gmail.com
-🔗 GitHub:sujitkumarmalla
-💼 LInkedin:http://linkedin.com/in/sujit-kumar-malla-b83248294
-
-⭐ Give a Star
-If you like this project, consider giving it a ⭐ on GitHub.
-It motivates me to improve it more!
-
-
+> If `requirements.txt` is not present, install core dependencies:
+>
+> ```bash
+> pip install opencv-python numpy scikit-learn pywin32 streamlit streamlit-autorefresh pandas
+> ```
 
 ---
 
-## 📤 Steps to Upload on GitHub
+## 📂 Project Structure
 
-1. Create a new repo on GitHub: `face-recognition-attendance`
-2. On your local PC:
-   ```bash
-   git init
-   git remote add origin https://github.com/yourusername/face-recognition-attendance.git
-   git add .
-   git commit -m "Initial commit with full working project"
-   git push -u origin main
-   </p>
+```
+SMART-ATTENDACE-SYSTEM-USING-MACHINE-LEARNING-main/
+├── app.py                  # Streamlit attendance dashboard
+├── test.py                 # Run live face recognition + attendance logging
+├── background.jpg          # Optional UI background image
+├── data/                   # Face data + models + Haarcascade
+│   ├── add_faces.py        # Script to capture faces & build training data
+│   ├── faces_data.pkl      # Saved face vectors
+│   ├── names.pkl           # Labels for each face sample
+│   └── haarcascade_frontalface_default.xml
+├── Attendance/             # Generated CSV attendance logs
+└── README.md
+```
+
+---
+
+## ▶️ How to Use
+
+### 1) Add a new user (capture faces)
+
+```bash
+python data/add_faces.py
+```
+
+Follow the prompt to enter your name and look at the camera until it collects ~100 samples.
+
+### 2) Run the attendance tracker
+
+```bash
+python test.py
+```
+
+- Press **`O`** to mark attendance for any recognized face
+- Press **`Q`** to quit
+
+### 3) View attendance (Streamlit dashboard)
+
+```bash
+streamlit run app.py
+```
+
+---
+
+## 📝 Notes
+
+- Attendance logs are stored per day in `Attendance/Attendance_<DATE>.csv`.
+- If you run into issues with the webcam or model data, delete `data/faces_data.pkl` and `data/names.pkl` and re-run `data/add_faces.py`.
+
+---
+
+## ⭐ License
+
+This project is released under the MIT License.
